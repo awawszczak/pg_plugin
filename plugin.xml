@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         id="com.acme.plugin.alert"
-        version="0.0.1">
+        version="0.0.2">
 
     <name>Alert</name>
     <description>A Cordova plugin that displays an alert popup dialog</description>
