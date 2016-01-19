@@ -12,5 +12,12 @@ module.exports = {
             "FanServAd",
             "showInterstitialAd",
             []);
+    },
+    hideAd: function (successCallback) {
+        cordova.exec(successCallback,
+            null, // No failure callback
+            "FanServAd",
+            "hideAd",
+            []);
     }
 };
