@@ -1,4 +1,4 @@
-package com.acme.plugin.alert;
+package com.fanserv.plugin.FanServAd;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -12,7 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Alert extends CordovaPlugin {
+public class FanServAd extends CordovaPlugin {
   protected void pluginInitialize() {
   }
 
@@ -24,6 +24,20 @@ public class Alert extends CordovaPlugin {
     }
     return false;
   }
+
+/*
+  private synchronized void showBannerAd(final String title,
+                                  final String message,
+                                  final String buttonLabel,
+                                  final CallbackContext callbackContext) {
+                                  }
+  private synchronized void showInterstitialAd(final String title,
+                                  final String message,
+                                  final String buttonLabel,
+                                  final CallbackContext callbackContext) {
+                                  }
+*/
+
 
   private synchronized void alert(final String title, 
                                   final String message, 

@@ -1,4 +1,4 @@
-#import "Alert.h"
+#import "FanServAd.h"
 
 @implementation Alert
 - (void)pluginInitialize
@@ -11,9 +11,19 @@
     [av show];
 }
 
-- (void)alert:(CDVInvokedUrlCommand*)command
+- (void)showBannerAd:(CDVInvokedUrlCommand*)command
 {
-    UIAlertView * av = [[UIAlertView alloc] initWithTitle:@"Alert from plugin"
+    UIAlertView * av = [[UIAlertView alloc] initWithTitle:@"showBannerAd"
+                                                  message:@""
+                                                 delegate:self
+                                        cancelButtonTitle:@"OK"
+                                        otherButtonTitles:nil];
+    [av show];
+}
+
+- (void)showInterstitialAd:(CDVInvokedUrlCommand*)command
+{
+    UIAlertView * av = [[UIAlertView alloc] initWithTitle:@"showInterstitialAd"
                                                   message:@""
                                                  delegate:self
                                         cancelButtonTitle:@"OK"
