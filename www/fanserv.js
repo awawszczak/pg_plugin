@@ -19,5 +19,19 @@ module.exports = {
             "FanServAd",
             "hideAd",
             []);
+    },
+    setHidden: function (successCallback) {
+        cordova.exec(successCallback,
+            null, // No failure callback
+            "FanServAd",
+            "setHidden",
+            []);
+    },
+    setVisible: function (successCallback) {
+        cordova.exec(successCallback,
+            null, // No failure callback
+            "FanServAd",
+            "setVisible",
+            []);
     }
 };

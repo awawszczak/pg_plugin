@@ -4,7 +4,9 @@
 
 - (void) showBannerAd:(CDVInvokedUrlCommand*)command;
 - (void) showInterstitialAd:(CDVInvokedUrlCommand*)command;
-- (void) hideAd;
+- (void) hideAd:(CDVInvokedUrlCommand*)command;
 
+- (void) setHidden:(CDVInvokedUrlCommand*)command;
+- (void) setVisible:(CDVInvokedUrlCommand*)command;
 
 @end
