@@ -23,6 +23,8 @@
         advertisementView.frame = newFrame;
         [view addSubview:advertisementView];
         self.adView = advertisementView;
+        NSLog(@"%@", self.adView);
+
     } failure:^(NSError *error) {
         NSLog(@"Advertismenet view creation failed");
     }];
@@ -34,20 +36,30 @@
 }
 
 - (void) hideAd:(CDVInvokedUrlCommand*)command {
-    UIViewController * vc = [UIViewController new];
-    [vc viewWillDisappear:YES];
-    [vc viewDidDisappear:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.adView && self.adView.superview) {
+            [self.adView removeFromSuperview];
+        }
+    });
 }
 
 - (void) setHidden:(CDVInvokedUrlCommand*)command {
     if (self.adView) {
-        [self.adView setHidden: YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.5 animations:^{
+                [self.adView setAlpha: 0];
+            }];
+        });
     }
 }
 
 - (void) setVisible:(CDVInvokedUrlCommand*)command {
     if (self.adView) {
-        [self.adView setHidden: NO];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.5 animations:^{
+                [self.adView setAlpha: 1];
+            }];
+        });
     }
 }
 
