@@ -21,7 +21,7 @@
                 <param name="android-package" value="com.fanserv.plugin.FanServAd" />
             </feature>
         </config-file>
-        <source-file src="src/android/FanServAd.java" target-dir="src/com/fanserv/plugin/fanservad" />
+        <source-file src="src/android/FanServAd.java" target-dir="src/com/fanserv/plugin" />
     </platform>
 
     <!-- ios -->
