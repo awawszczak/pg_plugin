@@ -1,5 +1,7 @@
 package com.fanserv.plugin;
 
+import android.app.Activity;
+import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
 import com.fanserv.fanserver.FanServer;
@@ -17,26 +19,35 @@ public class FanServAd extends CordovaPlugin {
     private String mBannerSize;
     private String mInterstitialSize;
 
-    private static final String fanServAppId = "61c8d48c8b274c919d1cfe8160daf9c1";
+    private static final String fanServAppId = "xxxxx";
 
     protected void pluginInitialize() {
-        System.err.println("PLUGIN INITIALIZE CALLED");
         initFanServ();
     }
 
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext)
+    public boolean execute(final String action, JSONArray args, CallbackContext callbackContext)
             throws JSONException {
-        System.err.println("EXECUTE CALLED");
-//        if (action.equals("alert")) {
-//            alert(args.getString(0), args.getString(1), args.getString(2), callbackContext);
-//            return true;
-//        }
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if ("showBannerAd".equals(action)) {
+                    showBannerAd();
+                } else if ("showInterstitialAd".equals(action)) {
+                    showInterstitialAd();
+                } else if ("hideAd".equals(action)) {
+                    hideAd();
+                } else if ("setHidden".equals(action)) {
+                    setHidden();
+                } else if ("setVisible".equals(action)) {
+                    setVisible();
+                }
+            }
+        });
         return false;
     }
 
 
     private synchronized void showBannerAd() {
-        System.err.println("SHOW BANNER AD CALLED");
         try {
             FanServer.getInstance().startAd(cordova.getActivity(), FanServer.FanServerAdTypePhoneBanner, mBannerSize);
         } catch (Exception e) {
@@ -45,7 +56,6 @@ public class FanServAd extends CordovaPlugin {
     }
 
     private synchronized void showInterstitialAd() {
-        System.err.println("SHOW INTERSTITIAL AD CALLED");
         try {
             FanServer.getInstance().startAd(cordova.getActivity(), FanServer.FanServerAdTypePhoneInterstitial, mInterstitialSize);
         } catch (Exception e) {
@@ -54,13 +64,12 @@ public class FanServAd extends CordovaPlugin {
     }
 
     private synchronized void hideAd() {
-        System.err.println("HIDE ADD CALLED");
         Method method;
         Object obj = FanServer.getInstance();
         Object[] parameters = new Object[1];
         Class<?>[] classArray = new Class<?>[1];
         parameters[0] = cordova.getActivity();
-        classArray[0] = cordova.getActivity().getClass();
+        classArray[0] = Activity.class;
         try {
             method = obj.getClass().getDeclaredMethod("cleanFromAds", classArray);
             method.setAccessible(true);
@@ -96,6 +105,7 @@ public class FanServAd extends CordovaPlugin {
             FanServer.getInstance().setBannerAlign(FanServer.FanServerAlign.FanServerAlignCenter);
             FanServer.getInstance().setWaitForImages(true);
             FanServer.getInstance().setCheckDoubleAdShowOnResume(false);
+            FanServer.getInstance().setBannerMargin((int) (48 * Resources.getSystem().getDisplayMetrics().density));
 
             if (screen_width >= 1440) mInterstitialSize = FanServer.FanServerAdSize1440x2560;
             else if (screen_width >= 1080) {
